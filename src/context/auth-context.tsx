@@ -1,61 +1,81 @@
-// import APIClient from "@/service/api-client";
-// import { createContext, ReactNode, useContext, useState } from "react";
+import APIClient from "@/service/api-client";
+import axios from "axios";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-// type UserLoginRequest = {
-//   email: string;
-//   password: string;
-// };
-// type User = {
-//   name: string;
-//   email: string;
-//   role: string;
-// };
-// interface AuthContextType {
-//   user: User;
-//   login: (user: UserLoginRequest) => void;
-//   logout: () => void;
-// }
-// const AuthContext = createContext<AuthContextType | undefined>(undefined);
-// export const AuthProvider = ({ children }: { children: ReactNode }) => {
-//   const [user, setUser] = useState<User>({} as User);
-//   const apiClient = new APIClient("/users/login");
+export type User = {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  exp: number;
+  tokenOrigin: string;
+};
+interface AuthContextType {
+  user: User | null;
+  isAuthenticated: boolean;
+  setUser: (user: User | null) => void;
+}
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>({} as User);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-//   const login = async ({ email, password }: UserLoginRequest) => {
-//     const res = await apiClient.post(
-//       { email, password },
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         withCredentials: true,
-//       }
-//     );
+  const getUser = new APIClient<User>("/users/current");
+  const getUserRefresh = new APIClient<User>("/users/current");
 
-//     setUser(res.data);
-//     console.log("ReSpOnSe: ", res);
-//     // console.log("useR: ", user);
-//   };
+  const loadUser = async () => {
+    try {
+      const response = await getUser.getAll({
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      setUser(response.data);
+      setIsAuthenticated(false);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
+          try {
+            await getUserRefresh.getAll({
+              headers: {
+                "Content-Type": "application/json",
+              },
+              withCredentials: true,
+            });
+            await loadUser();
+          } catch {
+            setUser(null);
+            setIsAuthenticated(false);
+          }
+        }
+      }
+    }
+  };
 
-//   const logout = () => {
-//     // setUser("");
-//   };
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-//   return (
-//     <AuthContext.Provider value={{ user, login, logout }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
+  return (
+    <AuthContext.Provider value={{ user, setUser, isAuthenticated }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-// // export const useAuth = () => {
-// //   const context = useContext(AuthContext);
-// //   return context;
-// // };
-// // eslint-disable-next-line react-refresh/only-export-components
-// export const useAuth = () => {
-//   const context = useContext(AuthContext);
-//   if (!context) {
-//     throw new Error("useAuth must be user within a AuthProvider");
-//   }
-//   return context;
-// };
+// eslint-disable-next-line react-refresh/only-export-components
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be user within a AuthProvider");
+  }
+  return context;
+};

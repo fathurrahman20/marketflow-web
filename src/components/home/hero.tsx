@@ -1,17 +1,13 @@
-import Navbar from "./navbar";
+// import Navbar from "./navbar";
 
-interface Props {
-  setMobileMenuOpen: (value: boolean) => void;
-}
-
-export default function Hero({ setMobileMenuOpen }: Props) {
+export default function Hero() {
   return (
-    <div className="relative bg-gray-900">
+    <div className="relative bg-gray-900 md:h-[550px] my-10">
       {/* Decorative image and overlay */}
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
         <img
           alt=""
-          src="https://tailwindui.com/plus/img/ecommerce-images/home-page-01-hero-full-width.jpg"
+          src="https://images.unsplash.com/photo-1516724562728-afc824a36e84?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           className="size-full object-cover"
         />
       </div>
@@ -20,11 +16,8 @@ export default function Hero({ setMobileMenuOpen }: Props) {
         className="absolute inset-0 bg-gray-900 opacity-50"
       />
 
-      {/* Navigation */}
-      <Navbar setMobileMenuOpen={setMobileMenuOpen} />
-
       <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-32 text-center sm:py-64 lg:px-0">
-        <h1 className="text-4xl font-bold tracking-tight text-white lg:text-6xl">
+        <h1 className="text-4xl font-bold tracking-tight md:-mt-32 text-white lg:text-6xl">
           New arrivals are here
         </h1>
         <p className="mt-4 text-xl text-white">

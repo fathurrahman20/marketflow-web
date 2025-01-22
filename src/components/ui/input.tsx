@@ -1,22 +1,42 @@
-import * as React from "react"
+import { cn } from "@/lib/utils";
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
+export interface InputProps extends React.ComponentProps<"input"> {
+  left?: React.ReactNode;
+  right?: React.ReactNode;
+}
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, left, right, ...props }, ref) => {
     return (
-      <input
-        type={type}
+      <div
         className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          "flex-row gap-3 flex h-9 w-full items-center px-3 rounded-md border border-input bg-transparent shadow-sm transition-colors focus-within:ring-1 focus-within:ring-ring disabled:opacity-50",
           className
+        )}>
+        {left && (
+          <div className="flex h-full items-center text-muted-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0">
+            {left}
+          </div>
         )}
-        ref={ref}
-        {...props}
-      />
-    )
+        <input
+          ref={ref}
+          className={cn(
+            "h-full flex-1 bg-transparent text-sm placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed"
+          )}
+          type={type}
+          {...props}
+        />
+        {right && (
+          <div className="h-full flex items-center text-muted-foreground [&_svg]:pointer-events-auto [&_svg]:size-4 [&_svg]:shrink-0">
+            {right}
+          </div>
+        )}
+      </div>
+    );
   }
-)
-Input.displayName = "Input"
+);
 
-export { Input }
+Input.displayName = "Input";
+
+export { Input };

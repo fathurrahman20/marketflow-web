@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from "axios";
 export interface FetchResponse<T> {
   success: boolean;
   message: boolean;
-  data: T[];
+  data: T;
 }
 
 const axiosInstance = axios.create({
@@ -26,6 +26,12 @@ export default class APIClient<T> {
   post = (data: T, config?: AxiosRequestConfig) => {
     return axiosInstance
       .post(this.endpoint, data, config)
+      .then((response) => response.data);
+  };
+
+  delete = (config?: AxiosRequestConfig) => {
+    return axiosInstance
+      .delete(this.endpoint, config)
       .then((response) => response.data);
   };
 }

@@ -2,6 +2,7 @@
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 // import "./App.css";
+import { AuthProvider } from "./context/auth-context";
 import Routers from "./routes/router";
 
 function App() {
@@ -9,7 +10,9 @@ function App() {
 
   return (
     <>
-      <Routers />
+      <AuthProvider>
+        <Routers />
+      </AuthProvider>
     </>
   );
 }
