@@ -1,6 +1,5 @@
 "use client";
 
-// import { useAuth } from "@/context/auth-context";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
@@ -23,6 +22,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import toast, { Toaster } from "react-hot-toast";
+import useTitlePage from "@/hooks/useTitlePage";
 
 interface RegisterRequest {
   name: string;
@@ -45,6 +45,7 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  useTitlePage("Sign Up");
   const notify = (message: string | undefined) => toast(message);
 
   let password = "";
@@ -136,7 +137,6 @@ export default function SignUp() {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      {/* <Input placeholder="shadcn" /> */}
                       <Input
                         id="name"
                         required
@@ -158,7 +158,6 @@ export default function SignUp() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      {/* <Input placeholder="shadcn" /> */}
                       <Input
                         id="email"
                         required

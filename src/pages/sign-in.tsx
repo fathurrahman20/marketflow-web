@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/form";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "@/context/auth-context";
+import useTitlePage from "@/hooks/useTitlePage";
 
 interface LoginRequest {
   email: string;
@@ -46,6 +47,7 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useAuth();
   const navigate = useNavigate();
+  useTitlePage("Sign In");
   const notify = (message: string | undefined) => toast.error(message);
 
   const formSchema = z.object({

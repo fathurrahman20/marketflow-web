@@ -41,12 +41,6 @@ export default function ProductList() {
               Explore Our Products
             </h2>
           </div>
-          {/* <a
-            href="#"
-            className="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block">
-            Shop the collection
-            <span aria-hidden="true"> &rarr;</span>
-          </a> */}
           <Button className="bg-[#DB4444] hover:bg-[#E07575] px-4 py-6">
             View All Products
           </Button>
@@ -69,7 +63,8 @@ export default function ProductList() {
                 </Link>
               </h3>
               <p className="mt-1 text-sm font-medium text-gray-900">
-                {product.price}
+                Rp{" "}
+                {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
               </p>
             </div>
           ))}
