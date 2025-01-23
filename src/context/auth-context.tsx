@@ -26,8 +26,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>({} as User);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const getUser = new APIClient<User>("/users/current");
-  const getUserRefresh = new APIClient<User>("/users/current");
+  const getUser = new APIClient<User>("/auth/me");
+  const getUserRefresh = new APIClient<User>("/auth/refresh");
 
   const loadUser = async () => {
     try {

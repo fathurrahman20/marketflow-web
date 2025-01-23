@@ -40,7 +40,7 @@ interface ErrorResponse {
   errors: string;
 }
 
-const apiClient = new APIClient("/users/login");
+const apiClient = new APIClient("/auth/login");
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);

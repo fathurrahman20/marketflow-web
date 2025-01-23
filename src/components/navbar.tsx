@@ -19,7 +19,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const userLogut = new APIClient("/users/current");
+  const userLogut = new APIClient("/auth/me");
   const handleLogout = () => {
     userLogut.delete({
       headers: {
@@ -31,12 +31,12 @@ export default function Navbar() {
   };
 
   function getInitials(name: string) {
-    const parts = name.trim().split(/\s+/);
+    const parts = name?.trim().split(/\s+/);
 
-    if (parts.length > 1) {
+    if (parts?.length > 1) {
       return parts[0][0] + parts[1][0];
     } else {
-      return name.slice(0, 2);
+      return name?.slice(0, 2);
     }
   }
   return (

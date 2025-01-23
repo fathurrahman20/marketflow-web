@@ -39,7 +39,7 @@ interface ErrorResponse {
   errors: string;
 }
 
-const apiClient = new APIClient("/users");
+const apiClient = new APIClient("/auth/register");
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
