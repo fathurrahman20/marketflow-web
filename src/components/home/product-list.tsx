@@ -1,33 +1,10 @@
-import APIClient from "@/service/api-client";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import { Button } from "../ui/button";
-
-interface ProductListProps {
-  id: number;
-  name: string;
-  slug: string;
-  price: number;
-  stock: number;
-  imageId: number;
-  imageUrl: string;
-}
+import useProduct from "@/hooks/useProducts";
+import CommonProductList from "../common/product/common-product-list";
 
 export default function ProductList() {
-  const apiClient = new APIClient<ProductListProps[]>("/products");
-
-  const { data } = useQuery({
-    queryKey: ["product-list"],
-    queryFn: () => {
-      return apiClient.getAll({
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
-    },
-  });
-  console.log("DaTa: ", data?.data);
+  const { data } = useProduct({});
 
   return (
     <div className="bg-white">
@@ -41,34 +18,14 @@ export default function ProductList() {
               Explore Our Products
             </h2>
           </div>
-          <Button className="bg-[#DB4444] hover:bg-[#E07575] px-4 py-6">
-            View All Products
-          </Button>
+          <Link to="/products">
+            <Button className="bg-[#DB4444] hover:bg-[#E07575] px-4 py-6">
+              View All Products
+            </Button>
+          </Link>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-          {data?.data.slice(0, 4).map((product) => (
-            <div key={product.id} className="group relative">
-              <div className="h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80">
-                <img
-                  alt={product.name}
-                  src={product.imageUrl}
-                  className="size-full object-cover"
-                />
-              </div>
-              <h3 className="mt-4 text-sm text-gray-700">
-                <Link to={`products/${product.slug}`}>
-                  <span className="absolute inset-0" />
-                  {product.name}
-                </Link>
-              </h3>
-              <p className="mt-1 text-sm font-medium text-gray-900">
-                Rp{" "}
-                {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-              </p>
-            </div>
-          ))}
-        </div>
+        <CommonProductList product={data?.data || []} />
 
         <div className="mt-8 text-sm md:hidden">
           <a

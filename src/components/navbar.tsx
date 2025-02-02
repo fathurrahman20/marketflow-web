@@ -1,6 +1,6 @@
 import { Heart, SearchIcon, ShoppingCart } from "lucide-react";
 import { Input } from "./ui/input";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "@/context/auth-context";
 import APIClient from "@/service/api-client";
 import {
@@ -18,6 +18,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 export default function Navbar() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { pathname } = useLocation();
 
   const userLogut = new APIClient("/auth/me");
   const handleLogout = () => {
@@ -51,23 +52,27 @@ export default function Navbar() {
               {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
               <Link
                 to="/"
-                className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900">
+                className={`inline-flex items-center ${
+                  pathname === "/"
+                    ? "border-[#DB4444] border-b-2 text-gray-900"
+                    : ""
+                }  px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-[#E07575] hover:border-b-2`}>
                 Home
               </Link>
               <Link
                 to="/"
-                className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-[#E07575] hover:text-gray-700 hover:pb-1">
                 Contact
               </Link>
               <Link
                 to="/"
-                className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-[#E07575] hover:text-gray-700 hover:pb-1">
                 About
               </Link>
               {!user && (
                 <Link
                   to="/signup"
-                  className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                  className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-[#E07575] hover:text-gray-700 hover:pb-1">
                   Sign Up
                 </Link>
               )}

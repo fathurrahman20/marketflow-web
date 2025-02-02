@@ -7,8 +7,10 @@ export interface FetchResponse<T> {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: import.meta.env.VITE_BE_URL!,
 });
+
+console.log("EnV: ", import.meta.env.BACKEND_URL);
 
 export default class APIClient<T> {
   endpoint: string;
