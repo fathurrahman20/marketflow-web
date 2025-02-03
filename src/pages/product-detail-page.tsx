@@ -5,8 +5,10 @@ import ProductDetail from "@/components/product-detail/product-detail";
 import ProductReview from "@/components/product-detail/product-review";
 import RelatedProducts from "@/components/product-detail/related-products";
 import useProducts, { Product } from "@/hooks/useProducts";
+import useTitlePage from "@/hooks/useTitlePage";
 import APIClient from "@/service/api-client";
 import { useQuery } from "@tanstack/react-query";
+// import { useState } from "react";
 import { useParams } from "react-router";
 
 export interface Review {
@@ -74,6 +76,7 @@ export default function ProductDetailPage() {
     },
     enabled: !!id,
   });
+  useTitlePage(product?.data.name);
 
   return (
     <Layout>

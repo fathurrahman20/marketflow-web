@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useTitlePage = (title: string) => {
+const useTitlePage = (title: string | undefined) => {
   useEffect(() => {
     document.title = `MarketFlow | ${title}`;
   }, [title]);

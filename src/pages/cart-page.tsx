@@ -2,11 +2,14 @@
 
 import CartProduct from "@/components/cart/cart-product";
 import Layout from "@/components/layout";
+import { Skeleton } from "@/components/ui/skeleton";
 import useCart from "@/hooks/useCarts";
+import useTitlePage from "@/hooks/useTitlePage";
 import { Link } from "react-router";
 
 export default function CartPage() {
-  const { data } = useCart();
+  useTitlePage("Cart");
+  const { data, isLoading } = useCart();
   return (
     <Layout>
       <div className="bg-white">
@@ -26,6 +29,21 @@ export default function CartPage() {
                   <ul
                     role="list"
                     className="divide-y divide-gray-200 border-b border-t border-gray-200">
+                    {isLoading && (
+                      <div className="flex flex-row py-5">
+                        <Skeleton className="h-[100px] w-[110px] my-auto" />
+                        <div className="w-full items-center justify-between px-5 flex flex-row">
+                          <div className="flex flex-col gap-y-16 justify-center">
+                            <Skeleton className="h-4 w-[100px]" />
+                            <Skeleton className="h-4 w-[100px]" />
+                          </div>
+                          <div className="flex flex-col gap-y-16 justify-center">
+                            <Skeleton className="h-4 w-[180px]" />
+                            <Skeleton className="h-4 w-[180px]" />
+                          </div>
+                        </div>
+                      </div>
+                    )}
                     {data?.data?.items.map((item) => (
                       <CartProduct item={item} key={item.id} />
                     ))}
