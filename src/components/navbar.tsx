@@ -46,7 +46,9 @@ export default function Navbar() {
         <div className="flex h-16 justify-between">
           <div className="flex px-2 lg:px-0">
             <div className="flex shrink-0 items-center">
-              <h2 className="font-bold">Marketflow</h2>
+              <Link to="/">
+                <h2 className="font-bold">Marketflow</h2>
+              </Link>
             </div>
             <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
               {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
@@ -174,7 +176,7 @@ export default function Navbar() {
           </Link>
           {!user && (
             <Link
-              to="/"
+              to="/signup"
               className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800">
               Sign Up
             </Link>
@@ -205,7 +207,8 @@ export default function Navbar() {
                   Settings
                 </Link>
                 <Link
-                  to="/"
+                  to="/signin"
+                  onClick={handleLogout}
                   className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">
                   Sign out
                 </Link>
@@ -214,7 +217,7 @@ export default function Navbar() {
           )}
           {!user && (
             <Link
-              to="/"
+              to="/signin"
               className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">
               Sign In
             </Link>

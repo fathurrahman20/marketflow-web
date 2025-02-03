@@ -7,6 +7,7 @@ export interface CartItems {
   cartId: string;
   productId: string;
   quantity: number;
+  totalPrice: number;
   createdAt: Date;
   updatedAt: Date;
   product: Product;

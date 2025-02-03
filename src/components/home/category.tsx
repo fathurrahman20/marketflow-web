@@ -24,8 +24,8 @@ export default function Category() {
       <div className="flex flex-wrap justify-center md:justify-between gap-x-6 gap-y-6">
         {isLoading && (
           <>
-            {[1, 2, 3, 4, 5, 6].map(() => (
-              <Skeleton className="h-[180px] w-[180px] rounded-xl" />
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <Skeleton key={i} className="h-[180px] w-[180px] rounded-xl" />
             ))}
           </>
         )}
