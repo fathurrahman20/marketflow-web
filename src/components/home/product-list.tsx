@@ -2,9 +2,10 @@ import { Link } from "react-router";
 import { Button } from "../ui/button";
 import useProduct from "@/hooks/useProducts";
 import CommonProductList from "../common/product/common-product-list";
+import { Skeleton } from "../ui/skeleton";
 
 export default function ProductList() {
-  const { data } = useProduct({});
+  const { data, isLoading } = useProduct({});
 
   return (
     <div className="bg-white">
@@ -25,7 +26,21 @@ export default function ProductList() {
           </Link>
         </div>
 
-        <CommonProductList product={data?.data || []} />
+        {isLoading ? (
+          <div className="flex justify-between">
+            {[1, 2, 3, 4].map((item) => (
+              <div className="flex flex-col space-y-3" key={item}>
+                <Skeleton className="h-[290px] w-[288px] rounded-xl" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-[140px]" />
+                  <Skeleton className="h-4 w-[200px]" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <CommonProductList product={data?.data || []} />
+        )}
 
         <div className="mt-8 text-sm md:hidden">
           <a

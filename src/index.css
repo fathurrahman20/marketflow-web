@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Merriweather";
+  src: url("@/assets/fonts/Merriweather.otf");
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, Optimus Princeps, Merriweather, system-ui, Avenir,
+    Helvetica, Arial, sans-serif;
   /* line-height: 1.5;
   font-weight: 400;
 

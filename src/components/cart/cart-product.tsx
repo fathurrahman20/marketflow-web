@@ -2,7 +2,7 @@ import { CartItems } from "@/hooks/useCarts";
 import { formatIdr } from "@/lib/utils";
 import { queryClient } from "@/main";
 import APIClient from "@/service/api-client";
-import { CheckIcon, ClockIcon } from "@heroicons/react/20/solid";
+// import { CheckIcon, ClockIcon } from "@heroicons/react/20/solid";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Link } from "react-router";
@@ -24,7 +24,7 @@ export default function CartProduct({ item }: { item: CartItems }) {
   };
   return (
     <>
-      <li key={item.id} className="flex py-3 sm:py-10">
+      {/* <li key={item.id} className="flex py-3 sm:py-10">
         <div className="shrink-0">
           <img
             alt={item.product.name}
@@ -53,8 +53,8 @@ export default function CartProduct({ item }: { item: CartItems }) {
 
             <p></p>
 
-            <div className="mt-4 flex flex-col flex-auto items-center sm:absolute sm:left-1/2 sm:top-0 sm:mt-0 sm:block">
-              <div className="mt-7 flex flex-1 items-end">
+            <div className="mt-4 flex flex-col flex-auto justify-between items-center sm:absolute sm:left-1/2 sm:top-0 sm:mt-0 sm:block">
+              <div className="mt-7 flex flex-1 justify-between items-center">
                 <dl className="flex divide-x divide-gray-200 text-sm">
                   <div className="flex pr-4 sm:pr-6">
                     <dt className="font-medium text-gray-900">Quantity:</dt>
@@ -93,6 +93,41 @@ export default function CartProduct({ item }: { item: CartItems }) {
               {item.product.stock > 1 ? "In stock" : `Ships in 3 days`}
             </span>
           </p>
+        </div>
+      </li> */}
+      <li key={item.id} className="flex py-6">
+        <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
+          <img
+            alt={item.product.name}
+            src={item.product.imageUrl}
+            className="size-full object-cover"
+          />
+        </div>
+
+        <div className="ml-4 flex flex-1 flex-col">
+          <div>
+            <div className="flex justify-between text-base font-medium text-gray-900">
+              <h3>
+                <Link to={`/products/${item.product.slug}`}>
+                  {item.product.name}
+                </Link>
+              </h3>
+              <p className="ml-4">{formatIdr(item.product.price)}</p>
+            </div>
+            {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
+          </div>
+          <div className="flex flex-1 items-end justify-between text-sm">
+            <p className="text-gray-500">Qty {item.quantity}</p>
+
+            <div className="flex">
+              <button
+                type="button"
+                onClick={handleRemoveItem}
+                className="font-medium text-indigo-600 hover:text-indigo-500">
+                Remove
+              </button>
+            </div>
+          </div>
         </div>
       </li>
     </>

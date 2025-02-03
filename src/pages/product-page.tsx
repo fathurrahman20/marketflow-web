@@ -2,7 +2,9 @@ import Layout from "@/components/layout";
 import ProductFilter from "@/components/product/product-filter";
 import ProductFilterMobile from "@/components/product/product-filter-mobile";
 import ProductGrid from "@/components/product/product-grid";
+import { Skeleton } from "@/components/ui/skeleton";
 import useProducts from "@/hooks/useProducts";
+import useTitlePage from "@/hooks/useTitlePage";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 
@@ -49,11 +51,12 @@ const filters: Filter[] = [
 
 export default function ProductPage() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  useTitlePage("Products");
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [activePage] = useState(parseInt(searchParams.get("page") || "1"));
 
-  const { data } = useProducts({
+  const { data, isLoading } = useProducts({
     category: searchParams?.get("category") || undefined,
     brand: searchParams?.get("brand") || undefined,
     page: searchParams?.get("page") || undefined,
@@ -117,7 +120,21 @@ export default function ProductPage() {
                 />
 
                 {/* Product grid */}
-                <ProductGrid data={data} />
+                {isLoading ? (
+                  <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-[313px] xl:grid-cols-3">
+                    {[1, 2, 3, 4, 5, 6].map((item) => (
+                      <div className="flex flex-col space-y-3" key={item}>
+                        <Skeleton className="h-[250px] w-[280px] rounded-xl" />
+                        <div className="space-y-2">
+                          <Skeleton className="h-4 w-[250px]" />
+                          <Skeleton className="h-4 w-[200px]" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <ProductGrid data={data} />
+                )}
               </div>
             </main>
           </div>

@@ -2,6 +2,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import useCategories from "@/hooks/useCategories";
 import useBrands from "@/hooks/useBrands";
 import { useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 interface ProductFilterProps {
   setMobileFiltersOpen: (val: boolean) => void;
@@ -20,8 +21,8 @@ export default function ProductFilter({
 }: ProductFilterProps) {
   const [selectedBrands, setSelectedBrands] = useState(brandValue);
   const [selectedCategories, setSelectedCategories] = useState(categoryValue);
-  const { data } = useCategories();
-  const { data: brands } = useBrands();
+  const { data: categories, isLoading: brandIsLoading } = useCategories();
+  const { data: brands, isLoading: categoryIsLoading } = useBrands();
 
   return (
     <aside>
@@ -47,6 +48,13 @@ export default function ProductFilter({
                 Brand
               </legend>
               <div className="space-y-3 pt-6">
+                {brandIsLoading && (
+                  <div className="flex flex-col gap-y-4">
+                    {[1, 2, 3, 4].map(() => (
+                      <Skeleton className="h-4 w-[200px]" />
+                    ))}
+                  </div>
+                )}
                 {brands?.data.map((brand) => (
                   <div key={brand.id} className="flex gap-3">
                     <div className="flex h-5 shrink-0 items-center">
@@ -107,7 +115,14 @@ export default function ProductFilter({
                 Category
               </legend>
               <div className="space-y-3 pt-6">
-                {data?.data.map((category) => (
+                {categoryIsLoading && (
+                  <div className="flex flex-col gap-y-4">
+                    {[1, 2, 3, 4].map(() => (
+                      <Skeleton className="h-4 w-[200px]" />
+                    ))}
+                  </div>
+                )}
+                {categories?.data.map((category) => (
                   <div key={category.id} className="flex gap-3">
                     <div className="flex h-5 shrink-0 items-center">
                       <div className="group grid size-4 grid-cols-1">
