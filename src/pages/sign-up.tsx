@@ -5,8 +5,7 @@ import { Link, useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "@/service/api-client";
 import { AxiosError } from "axios";
-import { AlertCircle, Eye, EyeClosed } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Eye, EyeClosed } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -36,7 +35,8 @@ interface RegisterResponse {
   role: string;
 }
 interface ErrorResponse {
-  errors: string;
+  message: string;
+  success: false;
 }
 
 const apiClient = new APIClient("/auth/register");
@@ -46,7 +46,6 @@ export default function SignUp() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
   useTitlePage("Sign Up");
-  const notify = (message: string | undefined) => toast(message);
 
   let password = "";
   const formSchema = z.object({
@@ -89,12 +88,11 @@ export default function SignUp() {
       });
     },
     onSuccess: () => {
-      notify("Registered successfully");
-      console.log("DaTa: ", mutation.data);
+      toast.success("Registered successfully");
       navigate("/signin");
     },
-    onError: () => {
-      notify(mutation?.error?.response?.data.errors);
+    onError: (error) => {
+      toast.error(error.response?.data.message);
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -111,18 +109,6 @@ export default function SignUp() {
             Sign Up
           </h2>
         </div>
-
-        {mutation.error && (
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <Alert variant="destructive">
-              <AlertCircle className="w-4 h-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>
-                {mutation.error.response?.data.errors}
-              </AlertDescription>
-            </Alert>
-          </div>
-        )}
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <Form {...form}>
@@ -184,6 +170,7 @@ export default function SignUp() {
                         type={showPassword ? "text" : "password"}
                         required
                         placeholder="******"
+                        autoComplete="password"
                         {...field}
                         right={
                           showPassword ? (
@@ -221,6 +208,7 @@ export default function SignUp() {
                         type={showConfirmPassword ? "text" : "password"}
                         required
                         placeholder="******"
+                        autoComplete="password"
                         {...field}
                         right={
                           showConfirmPassword ? (
@@ -251,7 +239,10 @@ export default function SignUp() {
                 )}
               />
               <div>
-                <Button type="submit" className="w-full">
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={mutation.isPending}>
                   {mutation.isPending ? (
                     <>
                       <svg

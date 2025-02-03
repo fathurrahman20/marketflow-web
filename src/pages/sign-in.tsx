@@ -5,8 +5,7 @@ import { Link, useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "@/service/api-client";
 import { AxiosError } from "axios";
-import { AlertCircle, Eye, EyeClosed } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Eye, EyeClosed } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,7 +37,8 @@ interface LoginResponse {
   tokenOrigin: string;
 }
 interface ErrorResponse {
-  errors: string;
+  message: string;
+  success: boolean;
 }
 
 const apiClient = new APIClient("/auth/login");
@@ -48,7 +48,6 @@ export default function SignIn() {
   const { setUser } = useAuth();
   const navigate = useNavigate();
   useTitlePage("Sign In");
-  const notify = (message: string | undefined) => toast.error(message);
 
   const formSchema = z.object({
     email: z.string().email().min(2).max(100),
@@ -81,7 +80,7 @@ export default function SignIn() {
       navigate("/");
     },
     onError: (error) => {
-      notify(error.response?.data.errors);
+      toast.error(error.response?.data.message);
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -97,17 +96,6 @@ export default function SignIn() {
             Sign in to your account
           </h2>
         </div>
-        {mutation.error && (
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <Alert variant="destructive">
-              <AlertCircle className="w-4 h-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>
-                {mutation.error.response?.data.errors}
-              </AlertDescription>
-            </Alert>
-          </div>
-        )}
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <Form {...form}>
@@ -149,6 +137,7 @@ export default function SignIn() {
                         type={showPassword ? "text" : "password"}
                         required
                         placeholder="******"
+                        autoComplete="password"
                         {...field}
                         right={
                           showPassword ? (
@@ -175,7 +164,10 @@ export default function SignIn() {
                 )}
               />
               <div>
-                <Button type="submit" className="w-full">
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={mutation.isPending}>
                   {mutation.isPending ? (
                     <>
                       <svg
