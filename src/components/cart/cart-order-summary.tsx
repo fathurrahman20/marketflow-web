@@ -4,7 +4,7 @@ import { Link } from "react-router";
 export default function CartOrderSummary({
   totalPrice,
 }: {
-  totalPrice: number | undefined;
+  totalPrice: number;
 }) {
   return (
     <section
@@ -34,7 +34,7 @@ export default function CartOrderSummary({
                 Order total
               </dt>
               <dd className="text-base font-medium text-gray-900">
-                {formatIdr(totalPrice! + 30000 || 0)}
+                {formatIdr(totalPrice + 30000 || 0)}
               </dd>
             </div>
           </dl>

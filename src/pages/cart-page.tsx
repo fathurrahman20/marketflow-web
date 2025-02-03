@@ -55,7 +55,7 @@ export default function CartPage() {
                 </section>
 
                 {/* Order summary */}
-                <CartOrderSummary totalPrice={totalPrice} />
+                <CartOrderSummary totalPrice={totalPrice ? totalPrice : 0} />
               </form>
             </div>
           </div>
