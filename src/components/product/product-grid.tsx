@@ -22,10 +22,8 @@ export default function ProductGrid({ data }: ProductGridProps) {
 
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
           {data?.data.map((product) => (
-            <Link to={`/products/${product.slug}`}>
-              <div
-                key={product.id}
-                className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
+            <Link to={`/products/${product.slug}`} key={product.id}>
+              <div className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white">
                 <img
                   alt={product.name}
                   src={product.imageUrl}

@@ -23,7 +23,6 @@ export default function ProductFilter({
   const { data } = useCategories();
   const { data: brands } = useBrands();
 
-  console.log("CategoriesS: ", data?.data);
   return (
     <aside>
       <h2 className="sr-only">Filters</h2>
