@@ -10,7 +10,7 @@ import useTitlePage from "@/hooks/useTitlePage";
 export default function CartPage() {
   useTitlePage("Cart");
   const { data, isLoading } = useCart();
-  const totalPrice = data?.data.items.reduce(
+  const totalPrice = data?.data?.items?.reduce(
     (acc, item) => acc + item.totalPrice,
     0
   );

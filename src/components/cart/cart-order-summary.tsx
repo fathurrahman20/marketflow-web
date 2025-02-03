@@ -20,7 +20,7 @@ export default function CartOrderSummary({
             <div className="flex items-center justify-between py-4">
               <dt className="text-gray-600">Subtotal</dt>
               <dd className="font-medium text-gray-900">
-                {formatIdr(totalPrice || 0)}
+                {formatIdr(totalPrice)}
               </dd>
             </div>
             <div className="flex items-center justify-between py-4">
@@ -34,7 +34,7 @@ export default function CartOrderSummary({
                 Order total
               </dt>
               <dd className="text-base font-medium text-gray-900">
-                {formatIdr(totalPrice + 30000 || 0)}
+                {formatIdr(totalPrice + 30000)}
               </dd>
             </div>
           </dl>
