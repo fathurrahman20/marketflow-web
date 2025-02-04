@@ -42,10 +42,10 @@ export default function Navbar() {
   }
   return (
     <Disclosure as="nav" className="bg-white shadow">
-      <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
-        <div className="flex h-16 justify-between">
+      <div className="px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
+        <div className="flex justify-between h-16">
           <div className="flex px-2 lg:px-0">
-            <div className="flex shrink-0 items-center">
+            <div className="flex items-center shrink-0">
               <Link to="/">
                 <h2 className="font-bold">Marketflow</h2>
               </Link>
@@ -62,9 +62,13 @@ export default function Navbar() {
                 Home
               </Link>
               <Link
-                to="/"
-                className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-[#E07575] hover:text-gray-700 hover:pb-1">
-                Contact
+                to="/products"
+                className={`inline-flex items-center ${
+                  pathname.includes("/products")
+                    ? "border-[#DB4444] border-b-2 text-gray-900"
+                    : ""
+                }  px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-[#E07575] hover:border-b-2`}>
+                Product
               </Link>
               <Link
                 to="/"
@@ -80,7 +84,7 @@ export default function Navbar() {
               )}
             </div>
           </div>
-          <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
+          <div className="flex items-center justify-center flex-1 px-2 lg:ml-6 lg:justify-end">
             <div className="flex items-center gap-x-4 lg:max-w-xs">
               <Input
                 right={<SearchIcon />}
@@ -97,7 +101,7 @@ export default function Navbar() {
           </div>
           <div className="flex items-center lg:hidden">
             {/* Mobile menu button */}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <DisclosureButton className="relative inline-flex items-center justify-center p-2 text-gray-400 rounded-md group hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
               <Bars3Icon
@@ -115,7 +119,7 @@ export default function Navbar() {
             {user && (
               <Menu as="div" className="relative ml-4 shrink-0">
                 <div>
-                  <MenuButton className="relative flex rounded-full bg-white text-sm ring-2 ring-red-400 focus:outline-none hover:ring-2 hover:ring-red-300 focus:ring-offset-2">
+                  <MenuButton className="relative flex text-sm bg-white rounded-full ring-2 ring-red-400 focus:outline-none hover:ring-2 hover:ring-red-300 focus:ring-offset-2">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
                     <Avatar>
@@ -157,32 +161,44 @@ export default function Navbar() {
       </div>
 
       <DisclosurePanel className="lg:hidden">
-        <div className="space-y-1 pb-3 pt-2">
+        <div className="pt-2 pb-3 space-y-1">
           {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
           <Link
             to="/"
-            className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700">
+            className={`block py-2 pl-3 pr-4 text-base ${
+              pathname === "/"
+                ? "border-l-4 font-medium text-indigo-700 border-indigo-500 bg-indigo-50"
+                : " text-gray-600"
+            } `}>
             Home
           </Link>
           <Link
-            to="/"
-            className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800">
-            Contact
+            to="/products"
+            className={`block py-2 pl-3 pr-4 text-base ${
+              pathname.includes("/products")
+                ? " border-l-4 font-medium text-indigo-700 border-indigo-500 bg-indigo-50"
+                : " text-gray-600"
+            } `}>
+            Product
           </Link>
           <Link
             to="/"
-            className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800">
+            className={`block py-2 pl-3 pr-4 text-base ${
+              pathname === "/about"
+                ? "border-l-4 font-medium text-indigo-700 border-indigo-500 bg-indigo-50"
+                : " text-gray-600"
+            } `}>
             About
           </Link>
           {!user && (
             <Link
               to="/signup"
-              className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800">
+              className="block py-2 pl-3 pr-4 text-base font-medium text-gray-600 border-l-4 border-transparent hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800">
               Sign Up
             </Link>
           )}
         </div>
-        <div className="border-t border-gray-200 pb-3 pt-4">
+        <div className="pt-4 pb-3 border-t border-gray-200">
           {user && (
             <>
               <div className="flex items-center px-4">
@@ -200,6 +216,24 @@ export default function Navbar() {
                   to="/"
                   className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">
                   Your Profile
+                </Link>
+                <Link
+                  to="/wishlist"
+                  className={`block px-4 py-2 text-base hover:bg-gray-100 hover:text-gray-800 ${
+                    pathname === "/wishlist"
+                      ? "border-l-4 font-medium text-indigo-700 border-indigo-500 bg-indigo-50"
+                      : " text-gray-500"
+                  } `}>
+                  Wishlist
+                </Link>
+                <Link
+                  to="/cart"
+                  className={`block px-4 py-2 text-base hover:bg-gray-100 hover:text-gray-800 ${
+                    pathname === "/cart"
+                      ? "border-l-4 font-medium text-indigo-700 border-indigo-500 bg-indigo-50"
+                      : " text-gray-500"
+                  } `}>
+                  Cart
                 </Link>
                 <Link
                   to="/"

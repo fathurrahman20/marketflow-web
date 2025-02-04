@@ -1,5 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+export interface ErrorResponse {
+  message: string;
+  success: boolean;
+}
+
 export interface FetchResponse<T> {
   success: boolean;
   message: boolean;

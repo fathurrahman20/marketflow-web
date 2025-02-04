@@ -1,14 +1,19 @@
+import { useState } from "react";
 import { Product } from "@/hooks/useProducts";
 import { classNames, formatIdr } from "@/lib/utils";
 import { Reviews } from "@/pages/product-detail-page";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { Button } from "../ui/button";
 import { ShoppingBasket } from "lucide-react";
-import APIClient from "@/service/api-client";
+import APIClient, { ErrorResponse, FetchResponse } from "@/service/api-client";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { useAuth } from "@/context/auth-context";
 import toast, { Toaster } from "react-hot-toast";
+import { Cart } from "@/hooks/useCarts";
+import { AxiosError } from "axios";
+import Spinner from "../ui/spinner-loading";
+// import { Input } from "../ui/input";
 
 export default function ProductDetail({
   product,
@@ -20,10 +25,11 @@ export default function ProductDetail({
   const navigate = useNavigate();
   const { user } = useAuth();
   const apiClient = new APIClient("/carts");
-  const mutation = useMutation({
+  const [quantity, setQuantity] = useState<number>(1);
+  const mutation = useMutation<FetchResponse<Cart>, AxiosError<ErrorResponse>>({
     mutationFn: () => {
       return apiClient.post(
-        { productId: product?.id, quantity: 1 },
+        { productId: product?.id, quantity },
         {
           headers: {
             "Content-Type": "application/json",
@@ -31,6 +37,10 @@ export default function ProductDetail({
           withCredentials: true,
         }
       );
+    },
+    onError: (error) => {
+      toast.error(error.response?.data.message);
+      setTimeout(() => navigate("/cart"), 2000);
     },
     onSuccess: () => {
       toast.success("Product successfully added to cart");
@@ -41,6 +51,11 @@ export default function ProductDetail({
   });
 
   const handleAddToCart = () => {
+    if (product && quantity > product?.stock) {
+      toast.error(`Maximum stock for this product is ${product?.stock}.`);
+      return;
+    }
+
     if (!user?.name) {
       toast.error("Please Login First to Continue");
     } else {
@@ -50,7 +65,7 @@ export default function ProductDetail({
   return (
     <>
       <Toaster />
-      <div className="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
+      <div className="max-w-2xl mx-auto mt-14 sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
         <div className="flex flex-col-reverse">
           <div className="mt-4">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
@@ -87,19 +102,60 @@ export default function ProductDetail({
         </div>
 
         <p className="mt-6 text-gray-500">{product?.description}</p>
-        <div className="mt-10">
-          <Button className="w-full py-5" onClick={handleAddToCart}>
-            <ShoppingBasket /> Add to cart
-          </Button>
-        </div>
+        {product && (
+          <>
+            <div className="flex mt-4 gap-x-2">
+              <Button
+                className="mr-3"
+                disabled={quantity <= 1}
+                type="button"
+                onClick={() => setQuantity((prevQuantity) => prevQuantity - 1)}>
+                -
+              </Button>
+              <input
+                name="qty"
+                type="number"
+                value={quantity}
+                className="w-[50px] text-center "
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                max={product?.stock}
+                min={1}
+                required
+              />
+              <Button
+                type="button"
+                disabled={quantity >= product?.stock}
+                onClick={() => setQuantity((prevQuantity) => prevQuantity + 1)}>
+                +
+              </Button>
+            </div>
 
-        <div className="mt-10 border-t border-gray-200 pt-10">
+            <div className="mt-10">
+              <Button
+                disabled={mutation.isPending}
+                className="w-full py-5"
+                onClick={handleAddToCart}>
+                <ShoppingBasket />{" "}
+                {mutation.isPending ? (
+                  <>
+                    <Spinner />
+                    <span>Loading</span>
+                  </>
+                ) : (
+                  "Add to cart"
+                )}
+              </Button>
+            </div>
+          </>
+        )}
+
+        <div className="pt-10 mt-10 border-t border-gray-200">
           <h3 className="text-sm font-medium text-gray-900">Share</h3>
-          <ul role="list" className="mt-4 flex items-center space-x-6">
+          <ul role="list" className="flex items-center mt-4 space-x-6">
             <li>
               <a
                 href="#"
-                className="flex size-6 items-center justify-center text-gray-400 hover:text-gray-500">
+                className="flex items-center justify-center text-gray-400 size-6 hover:text-gray-500">
                 <span className="sr-only">Share on Facebook</span>
                 <svg
                   fill="currentColor"
@@ -117,7 +173,7 @@ export default function ProductDetail({
             <li>
               <a
                 href="#"
-                className="flex size-6 items-center justify-center text-gray-400 hover:text-gray-500">
+                className="flex items-center justify-center text-gray-400 size-6 hover:text-gray-500">
                 <span className="sr-only">Share on Instagram</span>
                 <svg
                   fill="currentColor"
@@ -135,7 +191,7 @@ export default function ProductDetail({
             <li>
               <a
                 href="#"
-                className="flex size-6 items-center justify-center text-gray-400 hover:text-gray-500">
+                className="flex items-center justify-center text-gray-400 size-6 hover:text-gray-500">
                 <span className="sr-only">Share on X</span>
                 <svg
                   fill="currentColor"
