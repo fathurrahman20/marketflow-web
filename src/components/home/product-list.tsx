@@ -20,14 +20,14 @@ export default function ProductList() {
             </h2>
           </div>
           <Link to="/products">
-            <Button className="bg-[#DB4444] hover:bg-[#E07575] px-4 py-6">
+            <Button className="bg-[#DB4444] hidden md:block hover:bg-[#E07575] px-4 py-6">
               View All Products
             </Button>
           </Link>
         </div>
 
         {isLoading ? (
-          <div className="flex flex-wrap mx-auto md:justify-center gap-y-5 md:gap-y-0">
+          <div className="flex flex-wrap justify-center mx-auto mt-8 gap-y-5 md:gap-y-0">
             {[1, 2, 3, 4].map((item) => (
               <div className="flex flex-col space-y-3" key={item}>
                 <Skeleton className="h-[290px] w-[288px] rounded-xl" />
@@ -43,12 +43,12 @@ export default function ProductList() {
         )}
 
         <div className="mt-8 text-sm md:hidden">
-          <a
-            href="#"
-            className="font-medium text-indigo-600 hover:text-indigo-500">
+          <Link
+            to="/products"
+            className="font-medium text-[#DB4444] hover:text[#d84a4a]">
             Shop the collection
             <span aria-hidden="true"> &rarr;</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

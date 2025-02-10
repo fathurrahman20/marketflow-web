@@ -95,8 +95,8 @@ export default function ProductPage() {
               filters={filters}
             />
 
-            <main className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-              <div className="border-b border-gray-200 pb-10">
+            <main className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+              <div className="pb-10 border-b border-gray-200">
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900">
                   New Arrivals
                 </h1>
@@ -121,9 +121,11 @@ export default function ProductPage() {
 
                 {/* Product grid */}
                 {isLoading ? (
-                  <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-[313px] xl:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
                     {[1, 2, 3, 4, 5, 6].map((item) => (
-                      <div className="flex flex-col space-y-3" key={item}>
+                      <div
+                        className="flex flex-col justify-center space-y-3 md:justify-start"
+                        key={item}>
                         <Skeleton className="h-[250px] w-[280px] rounded-xl" />
                         <div className="space-y-2">
                           <Skeleton className="h-4 w-[250px]" />

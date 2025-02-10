@@ -54,22 +54,25 @@ export default function CartPage() {
                     {data?.data?.items.map((item) => (
                       <CartProduct item={item} key={item.id} />
                     ))}
-                    {!isLoading && data?.data?.items.length === 0 && (
-                      <div className="my-4">
-                        <Alert className="mx-auto md:text-center">
-                          <ShoppingCart className="w-4 h-4 md:hidden" />
-                          <AlertTitle>Your cart is currently empty</AlertTitle>
-                          <AlertDescription>
-                            Please add items before proceeding.
-                          </AlertDescription>
-                        </Alert>
-                      </div>
-                    )}
+                    {!isLoading &&
+                      (data?.data?.items.length === 0 || !data?.data) && (
+                        <div className="my-4">
+                          <Alert className="mx-auto md:text-center">
+                            <ShoppingCart className="w-4 h-4 md:hidden" />
+                            <AlertTitle>
+                              Your cart is currently empty
+                            </AlertTitle>
+                            <AlertDescription>
+                              Please add items before proceeding.
+                            </AlertDescription>
+                          </Alert>
+                        </div>
+                      )}
                   </ul>
                 </section>
 
                 {/* Order summary */}
-                {!isLoading && data?.data?.items.length !== 0 && (
+                {!isLoading && data?.data?.items.length !== 0 && data?.data && (
                   <CartOrderSummary totalPrice={totalPrice ? totalPrice : 0} />
                 )}
               </form>

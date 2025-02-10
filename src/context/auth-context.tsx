@@ -23,7 +23,7 @@ interface AuthContextType {
 }
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>({} as User);
+  const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const getUser = new APIClient<User>("/auth/me");
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         withCredentials: true,
       });
       setUser(response.data);
-      setIsAuthenticated(false);
+      setIsAuthenticated(!!response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 401) {
