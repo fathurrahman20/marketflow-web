@@ -23,29 +23,17 @@ export default function CartOrderSummary({
                 {formatIdr(totalPrice)}
               </dd>
             </div>
-            <div className="flex items-center justify-between py-4">
-              <dt className="text-gray-600">Shipping</dt>
-              <dd className="font-medium text-gray-900">
-                {totalPrice ? "Rp 30.000" : "Rp 0"}
-              </dd>
-            </div>
-            <div className="flex items-center justify-between py-4">
-              <dt className="text-base font-medium text-gray-900">
-                Order total
-              </dt>
-              <dd className="text-base font-medium text-gray-900">
-                {formatIdr(totalPrice > 0 ? totalPrice + 30000 : 0)}
-              </dd>
-            </div>
           </dl>
         </div>
       </div>
       <div className="mt-10">
-        <button
-          type="submit"
-          className="w-full px-4 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">
-          Checkout
-        </button>
+        <Link to="/checkout">
+          <button
+            type="submit"
+            className="w-full px-4 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">
+            Checkout
+          </button>
+        </Link>
       </div>
 
       <div className="mt-6 text-sm text-center text-gray-500">
