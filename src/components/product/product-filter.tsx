@@ -35,7 +35,7 @@ export default function ProductFilter({
         <span className="text-sm font-medium text-gray-700">Filters</span>
         <PlusIcon
           aria-hidden="true"
-          className="ml-1 size-5 shrink-0 text-gray-400"
+          className="ml-1 text-gray-400 size-5 shrink-0"
         />
       </button>
 
@@ -47,18 +47,18 @@ export default function ProductFilter({
               <legend className="block text-sm font-medium text-gray-900">
                 Brand
               </legend>
-              <div className="space-y-3 pt-6">
+              <div className="pt-6 space-y-3">
                 {brandIsLoading && (
                   <div className="flex flex-col gap-y-4">
-                    {[1, 2, 3, 4].map(() => (
-                      <Skeleton className="h-4 w-[200px]" />
+                    {[1, 2, 3, 4].map((index) => (
+                      <Skeleton className="h-4 w-[200px]" key={index} />
                     ))}
                   </div>
                 )}
                 {brands?.data.map((brand) => (
                   <div key={brand.id} className="flex gap-3">
-                    <div className="flex h-5 shrink-0 items-center">
-                      <div className="group grid size-4 grid-cols-1">
+                    <div className="flex items-center h-5 shrink-0">
+                      <div className="grid grid-cols-1 group size-4">
                         <input
                           id={`${brand.id}`}
                           checked={selectedBrands.includes(brand.name)}
@@ -74,7 +74,7 @@ export default function ProductFilter({
                             setSelectedBrands(updatedBrands);
                             brandOnChange(updatedBrands);
                           }}
-                          className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                          className="col-start-1 row-start-1 bg-white border border-gray-300 rounded appearance-none checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
                         />
                         <svg
                           fill="none"
@@ -114,18 +114,18 @@ export default function ProductFilter({
               <legend className="block text-sm font-medium text-gray-900">
                 Category
               </legend>
-              <div className="space-y-3 pt-6">
+              <div className="pt-6 space-y-3">
                 {categoryIsLoading && (
                   <div className="flex flex-col gap-y-4">
-                    {[1, 2, 3, 4].map(() => (
-                      <Skeleton className="h-4 w-[200px]" />
+                    {[1, 2, 3, 4].map((index) => (
+                      <Skeleton className="h-4 w-[200px]" key={index} />
                     ))}
                   </div>
                 )}
                 {categories?.data.map((category) => (
                   <div key={category.id} className="flex gap-3">
-                    <div className="flex h-5 shrink-0 items-center">
-                      <div className="group grid size-4 grid-cols-1">
+                    <div className="flex items-center h-5 shrink-0">
+                      <div className="grid grid-cols-1 group size-4">
                         <input
                           id={`${category.name}`}
                           checked={selectedCategories.includes(category.name)}
@@ -141,7 +141,7 @@ export default function ProductFilter({
                             setSelectedCategories(updatedCategories);
                             categoryOnChange(updatedCategories);
                           }}
-                          className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                          className="col-start-1 row-start-1 bg-white border border-gray-300 rounded appearance-none checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
                         />
                         <svg
                           fill="none"

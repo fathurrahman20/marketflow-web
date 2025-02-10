@@ -9,7 +9,7 @@ export default function ProductList() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-4">
+      <div className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-4">
         <div className="md:flex md:items-center md:justify-between">
           <div>
             <h4 className="text-base text-[#DB4444] font-semibold">
@@ -27,7 +27,7 @@ export default function ProductList() {
         </div>
 
         {isLoading ? (
-          <div className="flex justify-between">
+          <div className="flex flex-wrap mx-auto md:justify-center gap-y-5 md:gap-y-0">
             {[1, 2, 3, 4].map((item) => (
               <div className="flex flex-col space-y-3" key={item}>
                 <Skeleton className="h-[290px] w-[288px] rounded-xl" />
