@@ -7,6 +7,8 @@ import ProductPage from "@/pages/product-page";
 import DetailProductPage from "../pages/product-detail-page";
 import CartPage from "../pages/cart-page";
 import CheckoutPage from "@/pages/checkout-page";
+import OrderHistoryPage from "@/pages/order-history-page";
+import ProtectedRoute from "@/components/protected-route";
 
 const routerList = createBrowserRouter([
   {
@@ -31,11 +33,27 @@ const routerList = createBrowserRouter([
   },
   {
     path: "/cart",
-    element: <CartPage />,
+    element: (
+      <ProtectedRoute>
+        <CartPage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/checkout",
-    element: <CheckoutPage />,
+    element: (
+      <ProtectedRoute>
+        <CheckoutPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/history",
+    element: (
+      <ProtectedRoute>
+        <OrderHistoryPage />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

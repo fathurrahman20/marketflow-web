@@ -121,11 +121,9 @@ export default function ProductPage() {
 
                 {/* Product grid */}
                 {isLoading ? (
-                  <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 xl:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-[312px] xl:grid-cols-3">
                     {[1, 2, 3, 4, 5, 6].map((item) => (
-                      <div
-                        className="flex flex-col justify-center space-y-3 md:justify-start"
-                        key={item}>
+                      <div className="flex flex-col space-y-3" key={item}>
                         <Skeleton className="h-[250px] w-[280px] rounded-xl" />
                         <div className="space-y-2">
                           <Skeleton className="h-4 w-[250px]" />

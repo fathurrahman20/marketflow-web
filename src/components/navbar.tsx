@@ -32,7 +32,7 @@ export default function Navbar() {
       },
       withCredentials: true,
     });
-    navigate("/signin");
+    navigate("/signin", { replace: true });
   };
 
   function getInitials(name: string) {
@@ -99,7 +99,7 @@ export default function Navbar() {
                 <Heart className="hidden md:block" />
               </Link>
               <Link to="/cart">
-                <div className="relative inline-flex">
+                <div className="relative inline-flex md:mt-[5px]">
                   <ShoppingCart className="hidden md:block" />
                   <div className="absolute items-center justify-center hidden w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full md:inline-flex -top-2 -end-2 dark:border-gray-900">
                     {totalCart}
@@ -145,6 +145,13 @@ export default function Navbar() {
                       to="/"
                       className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none">
                       Your Profile
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      to="/history"
+                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none">
+                      Order History
                     </Link>
                   </MenuItem>
                   <MenuItem>

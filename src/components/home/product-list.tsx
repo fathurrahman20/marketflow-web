@@ -20,7 +20,7 @@ export default function ProductList() {
             </h2>
           </div>
           <Link to="/products">
-            <Button className="bg-[#DB4444] hidden md:block hover:bg-[#E07575] px-4 py-6">
+            <Button className="bg-[#DB4444] hidden md:block hover:bg-[#E07575] px-4">
               View All Products
             </Button>
           </Link>
