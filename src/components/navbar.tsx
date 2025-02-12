@@ -14,11 +14,15 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import useCart from "@/hooks/useCarts";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { pathname } = useLocation();
+  const { data } = useCart();
+
+  const totalCart = data?.data?.items?.length || 0;
 
   const userLogut = new APIClient("/auth/me");
   const handleLogout = () => {
@@ -28,7 +32,7 @@ export default function Navbar() {
       },
       withCredentials: true,
     });
-    navigate("/signin");
+    navigate("/signin", { replace: true });
   };
 
   function getInitials(name: string) {
@@ -95,7 +99,12 @@ export default function Navbar() {
                 <Heart className="hidden md:block" />
               </Link>
               <Link to="/cart">
-                <ShoppingCart className="hidden md:block" />
+                <div className="relative inline-flex md:mt-[5px]">
+                  <ShoppingCart className="hidden md:block" />
+                  <div className="absolute items-center justify-center hidden w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full md:inline-flex -top-2 -end-2 dark:border-gray-900">
+                    {totalCart}
+                  </div>
+                </div>
               </Link>
             </div>
           </div>
@@ -140,6 +149,13 @@ export default function Navbar() {
                   </MenuItem>
                   <MenuItem>
                     <Link
+                      to="/history"
+                      className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none">
+                      Order History
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
                       to="/"
                       className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none">
                       Settings
@@ -162,7 +178,6 @@ export default function Navbar() {
 
       <DisclosurePanel className="lg:hidden">
         <div className="pt-2 pb-3 space-y-1">
-          {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
           <Link
             to="/"
             className={`block py-2 pl-3 pr-4 text-base ${
@@ -226,14 +241,13 @@ export default function Navbar() {
                   } `}>
                   Wishlist
                 </Link>
-                <Link
-                  to="/cart"
-                  className={`block px-4 py-2 text-base hover:bg-gray-100 hover:text-gray-800 ${
-                    pathname === "/cart"
-                      ? "border-l-4 font-medium text-indigo-700 border-indigo-500 bg-indigo-50"
-                      : " text-gray-500"
-                  } `}>
-                  Cart
+                <Link to="/cart" className="px-4 pt-10">
+                  <div className="relative inline-flex">
+                    <ShoppingCart className="block md:hidden" />
+                    <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full md:hidden -top-2 -end-2 dark:border-gray-900">
+                      {totalCart}
+                    </div>
+                  </div>
                 </Link>
                 <Link
                   to="/"

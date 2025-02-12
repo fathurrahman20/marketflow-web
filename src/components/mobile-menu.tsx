@@ -196,28 +196,6 @@ export default function MobileMenu({
               </a>
             </div>
           </div>
-
-          {/* <div className="space-y-6 border-t border-gray-200 px-4 py-6"> */}
-          {/* Currency selector */}
-          {/* <form>
-                <div className="-ml-2 inline-grid grid-cols-1">
-                  <select
-                    id="mobile-currency"
-                    name="currency"
-                    aria-label="Currency"
-                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-0.5 pl-2 pr-7 text-base font-medium text-gray-700 focus:outline focus:outline-2 group-hover:text-gray-800 sm:text-sm/6"
-                  >
-                    {currencies.map((currency) => (
-                      <option key={currency}>{currency}</option>
-                    ))}
-                  </select>
-                  <ChevronDownIcon
-                    aria-hidden="true"
-                    className="pointer-events-none col-start-1 row-start-1 mr-1 size-5 self-center justify-self-end fill-gray-500"
-                  />
-                </div>
-              </form> */}
-          {/* </div> */}
         </DialogPanel>
       </div>
     </Dialog>

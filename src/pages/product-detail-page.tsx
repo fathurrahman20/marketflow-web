@@ -66,7 +66,7 @@ export default function ProductDetailPage() {
   const apiClient = new APIClient<Product>(`/products/${id}`);
 
   const { data: product } = useQuery({
-    queryKey: ["products", id],
+    queryKey: ["products", id, "wishlists"],
     queryFn: () => {
       return apiClient.getAll({
         headers: {
@@ -80,7 +80,7 @@ export default function ProductDetailPage() {
 
   return (
     <Layout>
-      <main className="mx-auto px-4 pb-24 pt-14 sm:px-6 sm:pb-32 sm:pt-16 lg:max-w-7xl lg:px-8">
+      <main className="px-4 pb-24 mx-auto pt-14 sm:px-6 sm:pb-32 sm:pt-16 lg:max-w-7xl lg:px-8">
         {/* Product */}
         <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
           {/* Product image */}
@@ -93,7 +93,9 @@ export default function ProductDetailPage() {
           </div>
 
           {/* Product details */}
-          <ProductDetail product={product?.data} reviews={reviews} />
+          {product?.data && (
+            <ProductDetail product={product?.data} reviews={reviews} />
+          )}
 
           {/* Product Review */}
           <ProductReview reviews={reviews} />
