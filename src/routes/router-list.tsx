@@ -9,6 +9,7 @@ import CartPage from "../pages/cart-page";
 import CheckoutPage from "@/pages/checkout-page";
 import OrderHistoryPage from "@/pages/order-history-page";
 import ProtectedRoute from "@/components/protected-route";
+import WishlistPage from "@/pages/wishlist-page";
 
 const routerList = createBrowserRouter([
   {
@@ -52,6 +53,14 @@ const routerList = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <OrderHistoryPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/wishlist",
+    element: (
+      <ProtectedRoute>
+        <WishlistPage />
       </ProtectedRoute>
     ),
   },

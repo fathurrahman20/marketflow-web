@@ -2,7 +2,7 @@ import APIClient from "@/service/api-client";
 import { useQuery } from "@tanstack/react-query";
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   slug: string;
   description: string;

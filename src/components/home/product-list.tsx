@@ -27,7 +27,7 @@ export default function ProductList() {
         </div>
 
         {isLoading ? (
-          <div className="flex flex-wrap justify-center mx-auto mt-8 gap-y-5 md:gap-y-0">
+          <div className="flex flex-wrap justify-center mx-auto mt-8 gap-x-8 gap-y-5 md:gap-y-0">
             {[1, 2, 3, 4].map((item) => (
               <div className="flex flex-col space-y-3" key={item}>
                 <Skeleton className="h-[290px] w-[288px] rounded-xl" />

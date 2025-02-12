@@ -4,6 +4,7 @@ import Layout from "@/components/layout";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import useTitlePage from "@/hooks/useTitlePage";
 import useTransaction from "@/hooks/useTransactions";
 import { ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router";
@@ -11,6 +12,7 @@ import { useNavigate } from "react-router";
 export default function OrderHistoryPage() {
   const { data, isLoading } = useTransaction();
   const navigate = useNavigate();
+  useTitlePage("History Transaction");
   return (
     <Layout>
       <div className="bg-white">
