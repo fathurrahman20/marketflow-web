@@ -1,50 +1,72 @@
-# React + TypeScript + Vite
+# Marketflow Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Deskripsi
 
-Currently, two official plugins are available:
+**Marketflow** adalah aplikasi e-commerce sederhana yang memungkinkan pengguna untuk menjelajahi produk, menambahkannya ke wishlist atau keranjang belanja, serta membuat transaksi. Aplikasi ini dikembangkan menggunakan **React**, **TypeScript**, dan **Vite**, dengan antarmuka yang responsif dan modern.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> **Catatan:**
+>
+> - Beberapa fitur **belum tersedia**: halaman admin, halaman profil pengguna, fitur review produk, fitur pencarian produk, pagination di halaman produk, dan integrasi dengan payment gateway.
+> - Integrasi payment gateway direncanakan menggunakan **Midtrans**.
+> - Backend API menggunakan **Hono**, **Prisma**, dan **PostgreSQL**.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Stack Teknologi
 
-- Configure the top-level `parserOptions` property like this:
+- **Build Tool**: Vite
+- **Bahasa**: TypeScript
+- **UI Framework**: React
+- **Routing**: React Router
+- **State Management & Data Fetching**: React Query + Axios
+- **Form Handling & Validation**: React Hook Form + Zod
+- **UI Styling**: Tailwind CSS + Shadcn
+- **Notifications**: React Hot Toast
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## Fitur Utama
+
+- **Authentication & Authorization**: User dapat login, register, dan logout.
+- **Cart Management**: Menambahkan dan mengelola item dalam keranjang belanja.
+- **Wishlist**: Menyimpan produk favorit pengguna.
+- **Transaction Management**: Membuat transaksi dan melacak status transaksi.
+- **Responsiveness**: Desain mendukung berbagai perangkat (mobile, tablet, dan desktop).
+- **Notification System**: Memberikan feedback kepada pengguna dengan notifikasi.
+
+---
+
+## Fitur yang Sedang Dikembangkan
+
+- **Halaman Admin**: Pengelolaan produk, transaksi, dan pengguna.
+- **Halaman Profil Pengguna**: Melihat dan mengedit informasi akun serta riwayat transaksi.
+- **Fitur Review Produk**: Menambahkan dan melihat ulasan produk.
+- **Fitur Pencarian Produk**: Mencari produk berdasarkan nama atau kategori.
+- **Pagination**: Menampilkan produk dengan pagination di halaman produk.
+- **Integrasi Payment Gateway**: Menggunakan **Midtrans** untuk pembayaran online.
+
+---
+
+## Struktur Project
+
+```
+src
+ ├── assets          # File ikon, font, dll
+ ├── components      # Komponen reusable
+ ├── context         # Context
+ ├── hooks           # Custom hooks
+ ├── lib             # Helper functions
+ ├── pages           # Halaman utama aplikasi
+ ├── routes          # Konfigurasi routing
+ ├── schema          # Konfigurasi validasi form
+ ├── services        # API services (Axios)
+ └── App.tsx         # Entry point aplikasi
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Integrasi Backend
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Marketflow Frontend terhubung dengan [**Marketflow API**](https://github.com/fathurrahman20/marketflow-api/) yang dibangun menggunakan Hono, Prisma, dan PostgreSQL. Pastikan backend sudah berjalan sebelum menjalankan frontend.
+
+---

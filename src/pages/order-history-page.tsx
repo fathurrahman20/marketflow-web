@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import useTitlePage from "@/hooks/useTitlePage";
 import useTransaction from "@/hooks/useTransactions";
+import { formatIdr } from "@/lib/utils";
 import { ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -13,6 +14,17 @@ export default function OrderHistoryPage() {
   const { data, isLoading } = useTransaction();
   const navigate = useNavigate();
   useTitlePage("History Transaction");
+  // const totalPrice = data?.data?.items?.reduce(
+  //   (acc, item) => acc + item.totalPrice * item.quantity,
+  //   0
+  // );
+  // const totalPrice = data?.data.map((order) =>
+  //   order.items.reduce((acc, item) => acc + item.price * item.quantity, 0)
+  // );
+
+  // const total = data?.data?.map((order) =>
+  //   order.items.reduce((acc, item) => acc + item.price * item.quantity, 0)
+  // );
   return (
     <Layout>
       <div className="bg-white">
@@ -74,6 +86,9 @@ export default function OrderHistoryPage() {
                     <TransactionItem item={item} />
                   ))}
                 </div>
+                <h2 className="text-end">
+                  Total: {formatIdr(order.totalAmount)}
+                </h2>
               </section>
             ))}
           </div>

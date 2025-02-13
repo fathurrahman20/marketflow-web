@@ -41,7 +41,9 @@ export default function CartProduct({ item }: { item: CartItems }) {
                   {item.product.name}
                 </Link>
               </h3>
-              <p className="ml-4">{formatIdr(item?.totalPrice)}</p>
+              <p className="ml-4">
+                {formatIdr(item?.totalPrice * item?.quantity)}
+              </p>
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">

@@ -15,7 +15,7 @@ export default function RelatedProducts({
           Customers also viewed
         </h2>
         <Link to="/products">
-          <Button className="bg-[#DB4444] hover:bg-[#E07575] px-4 py-6">
+          <Button className="bg-[#111827] hover:bg-[#1c2844] px-4 py-6">
             View All Products
           </Button>
         </Link>

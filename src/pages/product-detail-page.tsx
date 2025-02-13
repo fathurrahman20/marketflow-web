@@ -76,7 +76,7 @@ export default function ProductDetailPage() {
     },
     enabled: !!id,
   });
-  useTitlePage(product?.data.name);
+  useTitlePage(product?.data.name || "Detail Product");
 
   return (
     <Layout>

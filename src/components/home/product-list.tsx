@@ -12,7 +12,7 @@ export default function ProductList() {
       <div className="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-4">
         <div className="md:flex md:items-center md:justify-between">
           <div>
-            <h4 className="text-base text-[#DB4444] font-semibold">
+            <h4 className="text-base text-[#111827] font-semibold">
               Our Product
             </h4>
             <h2 className="text-4xl font-semibold mt-5 mb-[60px]">
@@ -20,7 +20,7 @@ export default function ProductList() {
             </h2>
           </div>
           <Link to="/products">
-            <Button className="bg-[#DB4444] hidden md:block hover:bg-[#E07575] px-4">
+            <Button className="bg-[#111827] hover:bg-[#1c2844] px-4 py-6">
               View All Products
             </Button>
           </Link>

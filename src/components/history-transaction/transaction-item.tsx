@@ -29,7 +29,7 @@ export default function TransactionItem({ item }: TransactionItemProps) {
             <span>{item.quantity}</span>
           </p>
           <p className="mt-1 font-medium text-gray-900">
-            {formatIdr(item.price)}
+            {formatIdr(item.price * item.quantity)}
           </p>
         </div>
       </div>

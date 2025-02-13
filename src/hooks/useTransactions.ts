@@ -22,7 +22,7 @@ interface Transaction {
   province: string;
   postalCode: string;
   phone: string;
-  totalAmount: 66530000;
+  totalAmount: number;
   paymentMethod: "CASH" | "CASHLESS";
   status: "Pending" | "Paid" | "Shipped" | "Completed" | "Cancelled";
   createdAt: string;

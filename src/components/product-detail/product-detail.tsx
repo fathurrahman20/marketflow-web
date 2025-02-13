@@ -147,7 +147,7 @@ export default function ProductDetail({
             <div className="mt-10">
               <Button
                 disabled={isPending}
-                className="w-full py-5"
+                className="w-full py-5 bg-[#111827] hover:bg-[#1c2844]"
                 onClick={handleAddToCart}>
                 <ShoppingBasket />{" "}
                 {isPending ? (

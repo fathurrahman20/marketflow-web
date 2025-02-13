@@ -60,29 +60,29 @@ export default function Navbar() {
                 to="/"
                 className={`inline-flex items-center ${
                   pathname === "/"
-                    ? "border-[#DB4444] border-b-2 text-gray-900"
+                    ? "border-[#111827] border-b-2 text-gray-900"
                     : ""
-                }  px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-[#E07575] hover:border-b-2`}>
+                }  px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-[#1f2d4d] hover:border-b-2`}>
                 Home
               </Link>
               <Link
                 to="/products"
                 className={`inline-flex items-center ${
                   pathname === "/products"
-                    ? "border-[#DB4444] border-b-2 text-gray-900"
+                    ? "border-[#111827] border-b-2 text-gray-900"
                     : ""
-                }  px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-[#E07575] hover:border-b-2`}>
+                }  px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-[#1f2d4d] hover:border-b-2`}>
                 Product
               </Link>
               <Link
                 to="/"
-                className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-[#E07575] hover:text-gray-700 hover:pb-1">
+                className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-[#1f2d4d] hover:text-gray-700 hover:pb-1">
                 About
               </Link>
               {!user && (
                 <Link
                   to="/signup"
-                  className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-[#E07575] hover:text-gray-700 hover:pb-1">
+                  className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-[#1f2d4d] hover:text-gray-700 hover:pb-1">
                   Sign Up
                 </Link>
               )}
@@ -128,7 +128,7 @@ export default function Navbar() {
             {user && (
               <Menu as="div" className="relative ml-4 shrink-0">
                 <div>
-                  <MenuButton className="relative flex text-sm bg-white rounded-full ring-2 ring-red-400 focus:outline-none hover:ring-2 hover:ring-red-300 focus:ring-offset-2">
+                  <MenuButton className="relative flex text-sm bg-white rounded-full ring-2 ring-[#111827] focus:outline-none hover:ring-2 hover:ring-[#2a3e6b] focus:ring-offset-2">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
                     <Avatar>

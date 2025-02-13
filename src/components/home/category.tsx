@@ -16,7 +16,7 @@ export default function Category() {
   const { data, isLoading } = useCategories();
   return (
     <section className="md:mx-14 px-4 md:px-0">
-      <h4 className="text-base text-[#DB4444] font-semibold">Categories</h4>
+      <h4 className="text-base text-[#111827] font-semibold">Categories</h4>
       <h2 className="text-4xl font-semibold mt-5 mb-[60px]">
         Browse By Category
       </h2>
