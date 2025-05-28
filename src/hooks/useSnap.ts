@@ -21,12 +21,47 @@ const useSnap = () => {
   }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+  // const snapEmbed = (snap_token: any, embedId: any, action: any) => {
+  //   if (snap) {
+  //     snap.embed(snap_token, {
+  //       embedId,
+  //       onSuccess: function (result: unknown) {
+  //         console.log("success", result);
+  //         action.onSuccess(result);
+  //       },
+  //       onPending: function (result: unknown) {
+  //         console.log("pending", result);
+  //         action.onPending(result);
+  //       },
+  //       onClose: function () {
+  //         action.onClose();
+  //       },
+  //     });
+  //   }
+  // };
   const snapEmbed = (snap_token: string) => {
     if (snap) {
-      snap.pay(snap_token);
+      snap.pay(snap_token, {
+        onSuccess: function (result: unknown) {
+          console.log("success");
+          console.log(result);
+        },
+        onPending: function (result: unknown) {
+          console.log("pending");
+          console.log(result);
+        },
+        onError: function (result: unknown) {
+          console.log("error");
+          console.log(result);
+        },
+        onClose: function () {
+          console.log(
+            "customer closed the popup without finishing the payment"
+          );
+        },
+      });
       // , {
       // embedId,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       // onSuccess: function (result: any) {
       //   console.log("success", result);
       //   action.onSuccess(result);
