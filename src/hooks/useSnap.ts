@@ -20,7 +20,6 @@ const useSnap = () => {
     };
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
   // const snapEmbed = (snap_token: any, embedId: any, action: any) => {
   //   if (snap) {
   //     snap.embed(snap_token, {
