@@ -6,8 +6,10 @@ import formCheckoutSchema from "@/schema/checkout-schema";
 import useCreateTransaction from "@/hooks/useCreateTransaction";
 import { CustomFormField } from "../common/common-form";
 import { Form } from "../ui/form";
+import { useNavigate } from "react-router";
 
 export default function CheckoutForm() {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formCheckoutSchema>>({
     resolver: zodResolver(formCheckoutSchema),
     defaultValues: {
@@ -19,7 +21,11 @@ export default function CheckoutForm() {
       phone: "",
     },
   });
-  const { mutate, isPending } = useCreateTransaction();
+  const { mutate, isPending, status, data } = useCreateTransaction();
+
+  if (data && status === "success") {
+    navigate("/order-status");
+  }
 
   function onSubmit(values: z.infer<typeof formCheckoutSchema>) {
     mutate(values);
