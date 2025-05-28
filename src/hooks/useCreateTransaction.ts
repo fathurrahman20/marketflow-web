@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 // import { useNavigate } from "react-router";
 import useSnap from "./useSnap";
+// import { useNavigate } from "react-router";
 // import {} from "@/hooks/useSnap"
 
 interface CheckoutRequest {
@@ -45,26 +46,7 @@ export default function useCreateTransaction() {
       // );
       // navigate("/history");
       console.log(data);
-      snapEmbed(
-        data.data.snap_token
-        // "snap-container"
-        // {
-        //   onSuccess: function (result) {
-        //     console.log('success', result);
-        //     navigate("/history")
-        //     setSnapShow(false);
-        // },
-        // onPending: function(result){
-        //     console.log('pending', result);
-        //     navigate("/history")
-        //     setSnapShow(false)
-        // },
-        // onClose: function () {
-        //     navigate(`/order-status?transaction_id=${response.data.id}`)
-        //     setSnapShow(false)
-        // }
-        // }
-      );
+      snapEmbed(data.data.snap_token);
     },
     onError: (error: AxiosError<ErrorResponse>) => {
       const message =
