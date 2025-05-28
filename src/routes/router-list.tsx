@@ -10,6 +10,7 @@ import CheckoutPage from "@/pages/checkout-page";
 import OrderHistoryPage from "@/pages/order-history-page";
 import ProtectedRoute from "@/components/protected-route";
 import WishlistPage from "@/pages/wishlist-page";
+import OrderStatusPage from "@/pages/order-status";
 
 const routerList = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const routerList = createBrowserRouter([
   {
     path: "/products/:slug",
     element: <DetailProductPage />,
+  },
+  {
+    path: "/order-status",
+    element: <OrderStatusPage />,
   },
   {
     path: "/cart",
